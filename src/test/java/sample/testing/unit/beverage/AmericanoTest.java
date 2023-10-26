@@ -1,6 +1,5 @@
 package sample.testing.unit.beverage;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +21,4 @@ class AmericanoTest {
         Americano americano = new Americano();
         assertThat(americano.getPrice()).isEqualTo(4000);
     }
-
-
 }
