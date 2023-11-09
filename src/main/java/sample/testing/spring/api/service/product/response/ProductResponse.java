@@ -1,10 +1,10 @@
-package sample.testing.spring.api.service.response;
+package sample.testing.spring.api.service.product.response;
 
 import lombok.Builder;
 import lombok.Getter;
-import sample.testing.spring.domain.Product;
-import sample.testing.spring.domain.ProductSellingStatus;
-import sample.testing.spring.domain.ProductType;
+import sample.testing.spring.domain.product.Product;
+import sample.testing.spring.domain.product.ProductSellingStatus;
+import sample.testing.spring.domain.product.ProductType;
 
 @Getter
 public class ProductResponse {

@@ -1,4 +1,4 @@
-package sample.testing.spring.domain;
+package sample.testing.spring.domain.product;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

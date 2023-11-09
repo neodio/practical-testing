@@ -1,4 +1,4 @@
-package sample.testing.spring.domain;
+package sample.testing.spring.domain.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -5,15 +5,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+import sample.testing.spring.domain.product.Product;
+import sample.testing.spring.domain.product.ProductRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-import static sample.testing.spring.domain.ProductSellingStatus.HOLD;
-import static sample.testing.spring.domain.ProductSellingStatus.SELLING;
-import static sample.testing.spring.domain.ProductSellingStatus.STOP_SELLING;
-import static sample.testing.spring.domain.ProductType.HANDMADE;
+import static sample.testing.spring.domain.product.ProductSellingStatus.HOLD;
+import static sample.testing.spring.domain.product.ProductSellingStatus.SELLING;
+import static sample.testing.spring.domain.product.ProductSellingStatus.STOP_SELLING;
+import static sample.testing.spring.domain.product.ProductType.HANDMADE;
 
 @ActiveProfiles("test")
 //@SpringBootTest

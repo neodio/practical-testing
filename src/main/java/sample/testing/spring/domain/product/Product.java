@@ -1,9 +1,10 @@
-package sample.testing.spring.domain;
+package sample.testing.spring.domain.product;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sample.testing.spring.domain.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
