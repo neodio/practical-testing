@@ -3,7 +3,7 @@ package sample.testing.spring.api.service.order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sample.testing.spring.api.controller.order.request.OrderCreateRequest;
+import sample.testing.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.testing.spring.api.service.order.response.OrderResponse;
 import sample.testing.spring.domain.order.Order;
 import sample.testing.spring.domain.order.OrderRepository;
@@ -32,7 +32,7 @@ public class OrderService {
      * 재고 감소 -> 동시성 고민
      * optimistic lock / pessimistic lock
      */
-    public OrderResponse createOrder(OrderCreateRequest orderCreateRequest, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest orderCreateRequest, LocalDateTime registeredDateTime) {
         List<String> productNumbers = orderCreateRequest.getProductNumbers();
 
         // Product
