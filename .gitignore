@@ -36,4 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-build.gradle
+http/order.http
+http/product.http
