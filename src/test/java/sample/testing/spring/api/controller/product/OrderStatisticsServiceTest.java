@@ -5,8 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import sample.testing.spring.IntegrationTestSupport;
 import sample.testing.spring.client.mail.MailSendClient;
 import sample.testing.spring.domain.history.mail.MailSendHistory;
 import sample.testing.spring.domain.history.mail.MailSendHistoryRepository;
@@ -25,10 +25,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static sample.testing.spring.domain.product.ProductSellingStatus.SELLING;
-import static sample.testing.spring.domain.product.ProductType.*;
+import static sample.testing.spring.domain.product.ProductType.HANDMADE;
 
-@SpringBootTest
-class OrderStatisticsServiceTest {
+class OrderStatisticsServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderStatisticsService orderStatisticsService;
