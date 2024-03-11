@@ -1,19 +1,18 @@
 package sample.testing.spring.domain.product;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static sample.testing.spring.domain.product.ProductSellingStatus.HOLD;
 import static sample.testing.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.testing.spring.domain.product.ProductSellingStatus.STOP_SELLING;
 import static sample.testing.spring.domain.product.ProductType.HANDMADE;
+
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("test")
 //@SpringBootTest
@@ -34,7 +33,7 @@ class ProductRepositoryTest {
         productRepository.saveAll(List.of(product1, product2, product3));
 
         //when
-        List<Product> products = productRepository.findBySellingStatusIn(List.of(SELLING, HOLD));
+        List<Product> products = productRepository.findAllBySellingStatusIn(List.of(SELLING, HOLD));
 
         //then
         assertThat(products).hasSize(2)

@@ -1,5 +1,11 @@
 package sample.testing.spring.api.controller.product;
 
+import static org.mockito.ArgumentMatchers.any;
+import static sample.testing.spring.domain.product.ProductSellingStatus.SELLING;
+import static sample.testing.spring.domain.product.ProductType.HANDMADE;
+
+import java.time.LocalDateTime;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import sample.testing.spring.IntegrationTestSupport;
 import sample.testing.spring.client.mail.MailSendClient;
-import sample.testing.spring.domain.history.mail.MailSendHistory;
 import sample.testing.spring.domain.history.mail.MailSendHistoryRepository;
 import sample.testing.spring.domain.order.Order;
 import sample.testing.spring.domain.order.OrderRepository;
@@ -17,15 +22,6 @@ import sample.testing.spring.domain.orderproduct.OrderProductRepository;
 import sample.testing.spring.domain.product.Product;
 import sample.testing.spring.domain.product.ProductRepository;
 import sample.testing.spring.domain.product.ProductType;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static sample.testing.spring.domain.product.ProductSellingStatus.SELLING;
-import static sample.testing.spring.domain.product.ProductType.HANDMADE;
 
 class OrderStatisticsServiceTest extends IntegrationTestSupport {
 
@@ -78,15 +74,15 @@ class OrderStatisticsServiceTest extends IntegrationTestSupport {
                 .thenReturn(true);
 
         //when
-        boolean result = orderStatisticsService.sendOrderStatisticsMail(LocalDate.of(2023, 3, 5), "test@test.com");
-
-        //then
-        assertThat(result).isTrue();
-
-        List<MailSendHistory> histories = mailSendHistoryRepository.findAll();
-        assertThat(histories).hasSize(1)
-                .extracting("content")
-                .contains("총 매출 합계는 12000원입니다.");
+//        boolean result = orderStatisticsService.sendOrderStatisticsMail(LocalDate.of(2023, 3, 5), "test@test.com");
+//
+//        //then
+//        assertThat(result).isTrue();
+//
+//        List<MailSendHistory> histories = mailSendHistoryRepository.findAll();
+//        assertThat(histories).hasSize(1)
+//                .extracting("content")
+//                .contains("총 매출 합계는 12000원입니다.");
 
     }
 

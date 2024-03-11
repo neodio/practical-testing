@@ -1,51 +1,40 @@
 package sample.testing.spring.api.service.product;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import sample.testing.spring.api.controller.product.dto.ProductCreateRequest;
+import org.springframework.transaction.annotation.Transactional;
+import sample.testing.spring.api.service.product.request.ProductCreateServiceRequest;
 import sample.testing.spring.api.service.product.response.ProductResponse;
 import sample.testing.spring.domain.product.Product;
 import sample.testing.spring.domain.product.ProductRepository;
 import sample.testing.spring.domain.product.ProductSellingStatus;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductNumberFactory productNumberFactory;
 
-    // 동시성 이슈
-    // UUID
-    public ProductResponse createProduct(ProductCreateRequest request) {
-        String nextProductNumber = createNextProductNumber();
+    @Transactional
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
+        String nextProductNumber = productNumberFactory.createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);
-        Product saveProduct = productRepository.save(product);
+        Product savedProduct = productRepository.save(product);
 
-        return ProductResponse.of(saveProduct);
-    }
-
-    private String createNextProductNumber() {
-        String latestProductNumber = productRepository.findLatestProductNumber();
-
-        if (latestProductNumber == null) {
-            return "001";
-        }
-
-        int latestProductNumberInt = Integer.parseInt(latestProductNumber);
-        int nextProductNumberInt = latestProductNumberInt + 1;
-
-        return String.format("%03d", nextProductNumberInt);
+        return ProductResponse.of(savedProduct);
     }
 
     public List<ProductResponse> getSellingProducts() {
-        List<Product> products = productRepository.findBySellingStatusIn(ProductSellingStatus.forDisplay());
+        List<Product> products = productRepository.findAllBySellingStatusIn(ProductSellingStatus.forDisplay());
 
         return products.stream()
-                .map(product -> ProductResponse.of(product))
-                .collect(Collectors.toList());
+            .map(ProductResponse::of)
+            .collect(Collectors.toList());
     }
+
 }

@@ -1,15 +1,14 @@
 package sample.testing.spring.api.controller.product.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import sample.testing.spring.domain.product.Product;
-import sample.testing.spring.domain.product.ProductSellingStatus;
-import sample.testing.spring.domain.product.ProductType;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import sample.testing.spring.api.service.product.request.ProductCreateServiceRequest;
+import sample.testing.spring.domain.product.ProductSellingStatus;
+import sample.testing.spring.domain.product.ProductType;
 
 @Getter
 @NoArgsConstructor
@@ -35,13 +34,12 @@ public class ProductCreateRequest {
         this.price = price;
     }
 
-    public Product toEntity(String nextProductNumber) {
-        return Product.builder()
-                .productNumber(nextProductNumber)
-                .type(type)
-                .sellingStatus(sellingStatus)
-                .name(name)
-                .price(price)
-                .build();
+    public ProductCreateServiceRequest toServiceRequest() {
+        return ProductCreateServiceRequest.builder()
+            .type(type)
+            .sellingStatus(sellingStatus)
+            .name(name)
+            .price(price)
+            .build();
     }
 }

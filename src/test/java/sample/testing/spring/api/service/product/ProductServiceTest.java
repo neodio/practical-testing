@@ -1,5 +1,11 @@
 package sample.testing.spring.api.service.product;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
+import static sample.testing.spring.domain.product.ProductSellingStatus.SELLING;
+import static sample.testing.spring.domain.product.ProductType.HANDMADE;
+
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,13 +16,6 @@ import sample.testing.spring.api.service.product.response.ProductResponse;
 import sample.testing.spring.domain.product.Product;
 import sample.testing.spring.domain.product.ProductRepository;
 import sample.testing.spring.domain.product.ProductSellingStatus;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
-import static sample.testing.spring.domain.product.ProductSellingStatus.SELLING;
-import static sample.testing.spring.domain.product.ProductType.HANDMADE;
 
 class ProductServiceTest extends IntegrationTestSupport {
 
@@ -46,7 +45,7 @@ class ProductServiceTest extends IntegrationTestSupport {
                 .build();
 
         //when
-        ProductResponse productResponse = productService.createProduct(request);
+        ProductResponse productResponse = productService.createProduct(request.toServiceRequest());
 
         //then
         assertThat(productResponse)
@@ -75,7 +74,7 @@ class ProductServiceTest extends IntegrationTestSupport {
                 .build();
 
         //when
-        ProductResponse productResponse = productService.createProduct(request);
+        ProductResponse productResponse = productService.createProduct(request.toServiceRequest());
 
         //then
         assertThat(productResponse)
