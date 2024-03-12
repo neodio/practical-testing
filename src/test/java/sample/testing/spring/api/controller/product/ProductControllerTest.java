@@ -1,5 +1,12 @@
 package sample.testing.spring.api.controller.product;
 
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -9,14 +16,6 @@ import sample.testing.spring.api.controller.product.dto.ProductCreateRequest;
 import sample.testing.spring.api.service.product.response.ProductResponse;
 import sample.testing.spring.domain.product.ProductSellingStatus;
 import sample.testing.spring.domain.product.ProductType;
-
-import java.util.List;
-
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //@WebMvcTest(controllers = ProductController.class)
 class ProductControllerTest extends ControllerTestSupport {
@@ -70,7 +69,6 @@ class ProductControllerTest extends ControllerTestSupport {
         //given
         ProductCreateRequest request = ProductCreateRequest.builder()
                 .type(ProductType.HANDMADE)
-                .sellingStatus(ProductSellingStatus.SELLING)
                 .name("아메리카노")
                 .price(4000)
                 .build();
@@ -84,7 +82,7 @@ class ProductControllerTest extends ControllerTestSupport {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("400"))
                 .andExpect(jsonPath("$.status").value("BAD_REQUEST"))
-                .andExpect(jsonPath("$.message").value("상품 타입은 필수입니다."))
+                .andExpect(jsonPath("$.message").value("상품 판매상태는 필수입니다."))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
 
